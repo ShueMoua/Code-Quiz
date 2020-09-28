@@ -1,50 +1,55 @@
 // Setting the body to a variable
 // var body = document.body;
 
-var startHTML = document.getElementById("start")
+var startHTML = document.getElementById("start");
 var questionHTML = document.getElementById("question");
 var questiontext = document.getElementById("questiontext");
-var option1 = document.getElementById("numb1")
-var option2 = document.getElementById("numb2")
-var option3 = document.getElementById("numb3")
-var option4 = document.getElementById("numb4")
+var option1 = document.getElementById("numb1");
+var option2 = document.getElementById("numb2");
+var option3 = document.getElementById("numb3");
+var option4 = document.getElementById("numb4");
+var check = document.getElementById("check");
+var next = document.getElementById("Next");
+var results = document.getElementById("results");
 
 var questionarray = [
     {
-        question: "What is an HTML",
-        option1: "oHypter textile",
-        option2: "Hyper Text Markup Language",
-        option3: "placeholder3",
-        option4: "placeholder4",
-        correct: "2"
+        question: "What is 2 + 2?",
+        option1: "22",
+        option2: "4",
+        option3: "87",
+        option4: "14",
+        correct: "2",
     },
     {
-        question: "What is an CSS",
-        option1: "oHypter textile",
-        option2: "Hyper Text Markup Language",
-        option3: "placeholder3",
-        option4: "Cascading style sheets",
-        correct: "4"
+        question: "What is 9 + 6?",
+        option1: "11",
+        option2: "31",
+        option3: "96",
+        option4: "15",
+        correct: "4",
     },
     {
-        question: "What is an HTML",
-        option1: "oHypter textile",
-        option2: "Hyper Text Markup Language",
-        option3: "placeholder3",
-        option4: "placeholder4",
-        correct: "2"
+        question: "What is 7 * 4?",
+        option1: "21",
+        option2: "28",
+        option3: "35",
+        option4: "47",
+        correct: "2",
     },
     {
-        question: "What is an HTML",
-        option1: "oHypter textile",
-        option2: "Hyper Text Markup Language",
-        option3: "placeholder3",
-        option4: "placeholder4",
-        correct: "2"
+        question: "What is 5 + 1?",
+        option1: "6",
+        option2: "51",
+        option3: "15",
+        option4: "31",
+        correct: "1",
     }
 ]
 
-var qnumber = 0;
+var questNumber = 0;
+var correctResponse = 0;
+var wrongResponse = 0;
 
 // Creating all necessary elements
 // var h3el1 = document.createElement("h3");
@@ -101,10 +106,52 @@ function startQuiz() {
 //
 
 function getQuestion() {
-    questiontext.textContent = questionarray[qnumber].question
-    option1.textContent = questionarray[qnumber].option1
-    option2.textContent = questionarray[qnumber].option2
-    option3.textContent = questionarray[qnumber].option3
-    option4.textContent = questionarray[qnumber].option4
+    questiontext.textContent = questionarray[questNumber].question
+    option1.textContent = questionarray[questNumber].option1
+    option2.textContent = questionarray[questNumber].option2
+    option3.textContent = questionarray[questNumber].option3
+    option4.textContent = questionarray[questNumber].option4
 }
+
+function checkResponse(userentry){
+    console.log(userentry)
+    if (userentry === questionarray[questNumber].correct) {
+      correctResponse++ 
+      check.textContent = "Correct!" 
+    } else {
+        wrongResponse++
+        check.textContent = "Incorrect!"
+    }
+    if (questNumber < questionarray.length - 1 ) {
+        questNumber++
+        getQuestion()
+    } else {
+        console.log("End Quiz")
+        DisplayScore()
+    }
+}
+
+function DisplayScore (){
+    next.style.display="block";
+    questionHTML.style.display = "none";
+}
+
+
+ function saveUser() {
+     var user = document.getElementById("input").value
+     console.log(user,correctResponse,wrongResponse)
+ }
+
+
+
+
+
+
+
+
+
+
+
+
 questionHTML.style.display = "none"
+next.style.display="none"
