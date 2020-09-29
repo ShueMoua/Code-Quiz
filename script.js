@@ -11,6 +11,7 @@ var option4 = document.getElementById("numb4");
 var check = document.getElementById("check");
 var next = document.getElementById("Next");
 var results = document.getElementById("results");
+var submitUser = document.getElementById("save");
 
 var questionarray = [
     {
@@ -90,6 +91,7 @@ var wrongResponse = 0;
 // buttonEl.setAttribute("style", "margin:auto; text-align:center;");
 
 startHTML.addEventListener("click", startQuiz);
+submitUser.addEventListener("click", submitScore);
 
 function startQuiz() {
 
@@ -113,16 +115,16 @@ function getQuestion() {
     option4.textContent = questionarray[questNumber].option4
 }
 
-function checkResponse(userentry){
+function checkResponse(userentry) {
     console.log(userentry)
     if (userentry === questionarray[questNumber].correct) {
-      correctResponse++ 
-      check.textContent = "Correct!" 
+        correctResponse++
+        check.textContent = "Correct!"
     } else {
         wrongResponse++
         check.textContent = "Incorrect!"
     }
-    if (questNumber < questionarray.length - 1 ) {
+    if (questNumber < questionarray.length - 1) {
         questNumber++
         getQuestion()
     } else {
@@ -131,19 +133,21 @@ function checkResponse(userentry){
     }
 }
 
-function DisplayScore (){
-    next.style.display="block";
+function DisplayScore() {
+    next.style.display = "block";
     questionHTML.style.display = "none";
 }
 
 
- function saveUser() {
-     var user = document.getElementById("input").value
-     console.log(user,correctResponse,wrongResponse)
- }
+function saveUser() {
+    var user = document.getElementById("input").value
+    console.log(user, correctResponse, wrongResponse)
+}
 
 
-
+function submitScore() {
+    //add an append to append whatever the user submits to an ordered list on the score.html page
+}
 
 
 
@@ -154,4 +158,4 @@ function DisplayScore (){
 
 
 questionHTML.style.display = "none"
-next.style.display="none"
+next.style.display = "none"
