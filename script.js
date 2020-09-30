@@ -1,6 +1,4 @@
-// Setting the body to a variable
-// var body = document.body;
-
+// Converting HTML elements for user in JS
 var startHTML = document.getElementById("start");
 var questionHTML = document.getElementById("question");
 var questiontext = document.getElementById("questiontext");
@@ -17,6 +15,7 @@ var timerEle = document.getElementById("timer");
 
 var userArray = JSON.parse(localStorage.getItem("userList")) || [];
 
+// Created the question array
 var questionarray = [
     {
         question: "What is 2 + 2?",
@@ -63,11 +62,9 @@ function Timer(){
     timerInterval = setInterval(function() {
         timerCounter--;
         if(timerCounter === 0) {
-            // clearInterval(timerInterval);
-            //Add a function for when the timer ends 
             DisplayScore()
         }
-      timerEle.textContent = timerCounter
+      timerEle.textContent = "Time: " + timerCounter
     }, 1000);
 }
 
@@ -133,13 +130,6 @@ function submitScore() {
     localStorage.setItem("userList", JSON.stringify(userArray))
     window.location.href = "score.html"
 }
-
-
-
-
-
-
-
 
 
 questionHTML.style.display = "none"
