@@ -12,6 +12,10 @@ var check = document.getElementById("check");
 var next = document.getElementById("Next");
 var results = document.getElementById("results");
 var submitUser = document.getElementById("save");
+var inputELE = document.getElementById("input");
+var timerEle = document.getElementById("timer");
+
+var userArray = JSON.parse(localStorage.getItem("userList")) || [];
 
 var questionarray = [
     {
@@ -51,44 +55,21 @@ var questionarray = [
 var questNumber = 0;
 var correctResponse = 0;
 var wrongResponse = 0;
+var timerCounter = 15;
 
-// Creating all necessary elements
-// var h3el1 = document.createElement("h3");
-// Need to move timer to the end on header doc
-// var h3el2 = document.createElement("h3");
-// var h1el1 = document.createElement("h1");
-// var pel1 = document.createElement("p");
-// var buttonEl = document.createElement("button");
-// var timeLeft = 70;
+var timerInterval = 0
 
-
-// function Timer(){
-//     var timerInterval = setInterval(function() {
-//         timeLeft--;
-//         if(timeLeft === 0) {
-//             clearInterval(timerInterval);
-//             //Add a function for when the timer ends 
-//         }
-//     }, 1000);
-// }
-
-
-// h3el1.textContent = "View Highscores";
-// h3el2.textContent = "Time: " + timeLeft;
-// h1el1.textContent = "Coding Quiz Challenge"
-// pel1.textContent = "Try to answer the following questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds."
-// buttonEl.textContent = "Start Quiz"
-
-// body.appendChild(h3el1);
-// body.appendChild(h3el2);
-// body.appendChild(h1el1);
-// body.appendChild(pel1);
-// body.appendChild(buttonEl);
-
-// h1el1.setAttribute("style", "margin:auto; width:50%; text-align:center;");
-// pel1.setAttribute("style", "margin:auto; width:50%; text-align:center;");
-// // How to move button to the center?
-// buttonEl.setAttribute("style", "margin:auto; text-align:center;");
+function Timer(){
+    timerInterval = setInterval(function() {
+        timerCounter--;
+        if(timerCounter === 0) {
+            // clearInterval(timerInterval);
+            //Add a function for when the timer ends 
+            DisplayScore()
+        }
+      timerEle.textContent = timerCounter
+    }, 1000);
+}
 
 startHTML.addEventListener("click", startQuiz);
 submitUser.addEventListener("click", submitScore);
@@ -98,14 +79,10 @@ function startQuiz() {
     questionHTML.style.display = "block"
 
     startHTML.style.display = "none"
+    Timer()
     getQuestion()
 
 }
-
-// Timer()
-
-
-//
 
 function getQuestion() {
     questiontext.textContent = questionarray[questNumber].question
@@ -136,6 +113,7 @@ function checkResponse(userentry) {
 function DisplayScore() {
     next.style.display = "block";
     questionHTML.style.display = "none";
+    clearInterval(timerInterval);
 }
 
 
@@ -147,6 +125,13 @@ function saveUser() {
 
 function submitScore() {
     //add an append to append whatever the user submits to an ordered list on the score.html page
+    var userID = inputELE.value
+    userArray.push({
+        user: userID,
+        score: correctResponse
+    })
+    localStorage.setItem("userList", JSON.stringify(userArray))
+    window.location.href = "score.html"
 }
 
 
