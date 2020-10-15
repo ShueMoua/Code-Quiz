@@ -16,8 +16,7 @@ var timerEle = document.getElementById("timer");
 var userArray = JSON.parse(localStorage.getItem("userList")) || [];
 
 // Created the question array
-var questionarray = [
-    {
+var questionarray = [{
         question: "What is 2 + 2?",
         option1: "22",
         option2: "4",
@@ -58,13 +57,13 @@ var timerCounter = 15;
 
 var timerInterval = 0
 
-function Timer(){
+function Timer() {
     timerInterval = setInterval(function() {
         timerCounter--;
-        if(timerCounter === 0) {
+        if (timerCounter === 0) {
             DisplayScore()
         }
-      timerEle.textContent = "Time: " + timerCounter
+        timerEle.textContent = "Time: " + timerCounter
     }, 1000);
 }
 
@@ -96,7 +95,8 @@ function checkResponse(userentry) {
         check.textContent = "Correct!"
     } else {
         wrongResponse++
-        check.textContent = "Incorrect!"
+        check.textContent = "Incorrect!";
+        timerCounter
     }
     if (questNumber < questionarray.length - 1) {
         questNumber++
